@@ -1,0 +1,856 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forensic Neuroscience Training Academy | The Forensic Neuroscientist</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+tailwind.config={
+  theme:{
+    extend:{
+      colors:{
+        brandBlue:'#25AEF3',
+        brandOrange:'#F7930A',
+        ink:'#0B1628',
+        inkLight:'#16243E',
+        muted:'#64748B',
+        line:'#E2E8F0'
+      },
+      fontFamily:{
+        serif:['Instrument Serif','serif'],
+        sans:['Inter','sans-serif'],
+        mono:['JetBrains Mono','monospace'],
+        display:['Plus Jakarta Sans','sans-serif']
+      }
+    }
+  }
+}
+</script>
+<style>
+*{scroll-behavior:smooth}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:999px}
+::-webkit-scrollbar-track{background:#F1F5F9}
+.hero-grid{
+  background-image:
+    linear-gradient(rgba(37,174,243,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,174,243,0.06) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.glass{
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.shine{position:relative;overflow:hidden}
+.shine:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform:translateX(-100%);
+  transition:transform 0.7s;
+}
+.shine:hover:after{transform:translateX(100%)}
+.brain-glow{
+  background: radial-gradient(600px 400px at 50% 50%, rgba(37,174,243,0.25), transparent 60%),
+              radial-gradient(500px 350px at 70% 30%, rgba(247,147,10,0.22), transparent 60%);
+  filter:blur(1px);
+}
+.text-balance{text-wrap:balance}
+.nav-active{color:#25AEF3 !important; background:#EFF6FF; border-left:3px solid #F7930A}
+@media(max-width:1024px){.nav-active{border-left:none; border-bottom:2px solid #F7930A}}
+</style>
+</head>
+<body class="bg-[#FCFDFD] text-slate-900 font-sans antialiased overflow-x-hidden">
+<!-- Progress -->
+<div class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-brandBlue to-brandOrange z-[100] w-0" id="progress"></div>
+
+<!-- MOBILE TOP BAR -->
+<header class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/90 glass border-b border-slate-200">
+  <div class="flex items-center justify-between px-4 py-3">
+    <div class="flex items-center gap-3">
+      <img src="https://i.postimg.cc/Zqb7np2J/logo-removebg-preview.png" class="w-10 h-10 object-contain bg-white rounded-xl p-1 shadow-sm border border-slate-100" alt="logo">
+      <div>
+        <p class="text-[11px] tracking-[0.16em] font-semibold text-brandBlue leading-none">FORENSIC NEUROSCIENCE</p>
+        <p class="text-[13px] font-bold text-ink leading-none -mt-[1px]">TRAINING ACADEMY</p>
+      </div>
+    </div>
+    <button id="menuBtn" class="w-10 h-10 rounded-xl bg-ink text-white grid place-items-center">
+      <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+  </div>
+  <div id="mobileNav" class="hidden border-t border-slate-200 bg-white px-4 py-4 space-y-1">
+    <a href="#home" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Home</a>
+    <a href="#about" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="users" class="w-4 h-4"></i> About Academy</a>
+    <a href="#services" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Services</a>
+    <a href="#videos" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="play-circle" class="w-4 h-4"></i> Academy Channel</a>
+    <a href="#research" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="microscope" class="w-4 h-4"></i> Research & Insights</a>
+    <a href="#contact" class="mob-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-medium"><i data-lucide="mail" class="w-4 h-4"></i> Contact</a>
+    <button onclick="openConsult()" class="w-full mt-3 bg-brandOrange text-white font-bold py-3 rounded-full">Book Consultation →</button>
+  </div>
+</header>
+
+<div class="flex">
+<!-- SIDEBAR DESKTOP -->
+<aside class="hidden lg:flex w-[300px] fixed left-0 top-0 h-screen bg-white border-r border-slate-200 flex-col z-30">
+  <div class="px-7 pt-7 pb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-[48px] h-[48px] rounded-2xl bg-white border border-slate-200 shadow-sm grid place-items-center p-1.5">
+        <img src="https://i.postimg.cc/Zqb7np2J/logo-removebg-preview.png" alt="logo" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <p class="text-[10px] tracking-[0.18em] font-bold text-brandBlue">THE FORENSIC</p>
+        <p class="text-[12px] font-extrabold text-ink -mt-1 tracking-tight">NEUROSCIENTIST</p>
+        <p class="text-[10px] tracking-[0.16em] text-slate-500 font-semibold -mt-1">TRAINING ACADEMY</p>
+      </div>
+    </div>
+    <div class="mt-5 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-3 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-brandBlue/10 grid place-items-center text-brandBlue"><i data-lucide="award" class="w-4 h-4"></i></div>
+      <div>
+        <p class="text-[10px] tracking-widest font-semibold text-slate-500">EST. 2018 • CPD CERTIFIED</p>
+        <p class="text-xs font-semibold text-ink">Trusted by 12k+ Professionals</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="px-3 space-y-1 flex-1 overflow-y-auto">
+    <a href="#home" data-nav class="nav-link nav-active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-700 transition"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview <span class="ml-auto w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span></a>
+    <a href="#about" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="users" class="w-4 h-4"></i> About Academy</a>
+    <a href="#services" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Services & Training</a>
+    <a href="#videos" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="play-circle" class="w-4 h-4"></i> Academy Channel</a>
+    <a href="#research" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="microscope" class="w-4 h-4"></i> Research & Insights</a>
+    <a href="#contact" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="mail" class="w-4 h-4"></i> Contact & Consult</a>
+    <div class="px-4 pt-4">
+      <p class="text-[10px] tracking-[0.16em] font-bold text-slate-400">QUICK ACCESS</p>
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <button onclick="toast('Syllabus downloaded')" class="bg-slate-50 border border-slate-200 rounded-xl py-2.5 text-xs font-semibold flex flex-col items-center gap-1 hover:bg-white"><i data-lucide="file-text" class="w-4 h-4 text-brandBlue"></i> Syllabus</button>
+        <button onclick="toast('Case studies opened')" class="bg-slate-50 border border-slate-200 rounded-xl py-2.5 text-xs font-semibold flex flex-col items-center gap-1 hover:bg-white"><i data-lucide="scale" class="w-4 h-4 text-brandOrange"></i> Case Files</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="p-4 mt-auto">
+    <div class="bg-ink rounded-[20px] p-5 text-white relative overflow-hidden">
+      <div class="absolute -right-6 -top-6 w-24 h-24 bg-brandBlue/20 rounded-full blur-2xl"></div>
+      <p class="text-[11px] tracking-[0.14em] font-semibold text-brandBlue">NEED EXPERT OPINION?</p>
+      <h4 class="font-serif text-[18px] leading-tight mt-1">Forensic Consultation for Legal Teams</h4>
+      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Confidential case review within 48 hours.</p>
+      <button onclick="openConsult()" class="shine mt-4 w-full bg-brandOrange text-white font-bold py-3 rounded-full text-sm flex items-center justify-center gap-2">Book Consultation <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+      <p class="text-[10px] text-center text-slate-400 mt-2">CPD • HCPC • BPS Aligned</p>
+    </div>
+    <div class="flex items-center justify-between mt-4 px-2 text-slate-400">
+      <span class="text-[10px] tracking-widest font-semibold">FOLLOW</span>
+      <div class="flex gap-3">
+        <a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="hover:text-brandOrange"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+        <a href="#" class="hover:text-ink"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="#" class="hover:text-ink"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="flex-1 lg:ml-[300px] pt-[64px] lg:pt-0">
+  <!-- HERO -->
+  <section id="home" class="relative overflow-hidden bg-white hero-grid border-b border-slate-200">
+    <div class="absolute inset-0 bg-gradient-to-br from-white via-white to-[#EFF6FF]/60 pointer-events-none"></div>
+    <div class="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-8 lg:py-12">
+      <!-- top meta -->
+      <div class="flex flex-wrap items-center gap-3 text-[11px] font-semibold tracking-wide">
+        <span class="bg-ink text-white px-3 py-1.5 rounded-full flex items-center gap-2"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> LIVE COHORT • JAN 2025</span>
+        <span class="hidden md:inline-flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-slate-600"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-brandBlue"></i> BPS & HCPC Aligned Curriculum</span>
+        <span class="hidden lg:inline-flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-slate-600"><i data-lucide="users" class="w-3.5 h-3.5 text-brandBlue"></i> 12,400+ Professionals Trained</span>
+        <span class="ml-auto hidden md:flex items-center gap-2 text-slate-500"><span class="w-8 h-px bg-slate-300"></span> EST. 2018 • LONDON • GLOBAL ACCESS</span>
+      </div>
+
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-10 items-center mt-6 lg:mt-8">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-[#EFF6FF] border border-[#BFDBFE] text-brandBlue px-3 py-1.5 rounded-full text-xs font-bold">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> FORENSIC NEUROSCIENCE TRAINING ACADEMY
+          </div>
+          <h1 class="font-serif text-[38px] sm:text-[46px] lg:text-[54px] leading-[0.95] tracking-tight text-ink mt-4 text-balance">
+            Understanding the <span class="text-brandBlue italic">Brain.</span><br>
+            Informing <span class="relative inline-block">Justice. <span class="absolute left-0 -bottom-1 w-full h-[6px] bg-brandOrange/20 rounded-full"></span></span><br>
+            Advancing <span class="text-brandOrange">Knowledge.</span>
+          </h1>
+          <p class="text-[15px] lg:text-[16px] leading-relaxed text-slate-600 mt-5 max-w-[560px]">
+            Premium education and expert consultation at the intersection of neuroscience, psychology and the law. Making complex brain science <span class="font-semibold text-ink">clear, credible, and court-ready.</span>
+          </p>
+          <div class="flex flex-wrap gap-3 mt-7">
+            <a href="#services" class="shine bg-brandOrange text-white font-bold px-7 py-3.5 rounded-full inline-flex items-center gap-2 shadow-lg shadow-orange-200 hover:shadow-orange-300 transition text-sm">Explore Our Services <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            <button onclick="openVideo()" class="bg-white border border-slate-200 text-ink font-semibold px-6 py-3.5 rounded-full inline-flex items-center gap-3 hover:bg-slate-50 text-sm">
+              <span class="w-8 h-8 rounded-full bg-ink text-white grid place-items-center"><i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i></span> Watch Introduction <span class="text-slate-400 font-normal">3:42</span>
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-6 mt-6 text-xs">
+            <span class="flex items-center gap-2 text-slate-600"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> CPD Certified • Evidence-Based</span>
+            <span class="flex items-center gap-2 text-slate-600"><i data-lucide="star" class="w-4 h-4 text-brandOrange"></i> 4.9/5 (2,417 reviews)</span>
+            <span class="hidden sm:flex items-center gap-2 text-slate-600"><i data-lucide="lock" class="w-4 h-4"></i> Confidential Consultation</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3 mt-8 max-w-[520px]">
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+              <p class="text-2xl font-extrabold text-ink">500+</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">CASES REVIEWED</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+              <p class="text-2xl font-extrabold text-ink">98%</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">CLIENT RETENTION</p>
+            </div>
+            <div class="bg-brandBlue text-white rounded-2xl p-4 shadow-lg">
+              <p class="text-2xl font-extrabold">12k+</p><p class="text-[11px] tracking-widest font-semibold text-white/80">PROFESSIONALS</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BRAIN VISUAL -->
+        <div class="relative lg:h-[560px]">
+          <div class="absolute inset-0 brain-glow rounded-[32px]"></div>
+          <div class="relative bg-gradient-to-b from-[#0B1628] to-[#12233F] rounded-[28px] overflow-hidden border border-slate-800 shadow-2xl">
+            <div class="absolute top-4 left-4 right-4 flex items-center justify-between text-white/80 text-[11px]">
+              <span class="flex items-center gap-2 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full backdrop-blur"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> NEURAL MAPPING • LIVE</span>
+              <span class="hidden sm:inline-flex items-center gap-2 bg-white text-ink px-3 py-1.5 rounded-full font-semibold"><i data-lucide="brain" class="w-3.5 h-3.5 text-brandBlue"></i> 3D FORENSIC MODEL v4.1</span>
+            </div>
+            <div class="pt-16 pb-6 px-6">
+              <div class="relative mx-auto w-full max-w-[520px] aspect-square">
+                <img src="https://image.pollinations.ai/prompt/ultra%20detailed%203D%20human%20brain%20translucent%20with%20glowing%20neural%20connections%20blue%20and%20orange%20light%20on%20dark%20navy%20background,%20scientific%20visualization,%20cinematic%20lighting,%20high%20detail?width=700&height=700&nologo=true" alt="3D Brain" class="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(37,174,243,0.35)]">
+                <!-- floating cards -->
+                <div class="absolute top-6 right-0 bg-white rounded-2xl shadow-xl p-3 flex items-center gap-3 border border-slate-100">
+                  <div class="w-9 h-9 rounded-xl bg-brandBlue text-white grid place-items-center"><i data-lucide="activity" class="w-5 h-5"></i></div>
+                  <div><p class="text-xs font-bold text-ink">Prefrontal Cortex</p><p class="text-[11px] text-emerald-600 font-semibold">● Activity Elevated</p></div>
+                </div>
+                <div class="absolute bottom-10 left-0 bg-white rounded-2xl shadow-xl p-3 flex items-center gap-3 border border-slate-100">
+                  <div class="w-9 h-9 rounded-xl bg-brandOrange text-white grid place-items-center"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                  <div><p class="text-xs font-bold text-ink">Amygdala Response</p><p class="text-[11px] text-slate-500">Risk assessment • Active</p></div>
+                </div>
+                <div class="absolute bottom-0 right-6 bg-white rounded-full px-4 py-2 shadow-lg border border-slate-200 flex items-center gap-2 text-xs font-semibold text-ink"><span class="w-2 h-2 bg-brandOrange rounded-full"></span> Synaptic Density 94.2%</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 px-4 pb-4">
+              <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-3 text-white">
+                <p class="text-[10px] tracking-widest opacity-70">NEURAL PATHWAYS</p><p class="font-bold text-sm">86B Neurons</p><div class="mt-2 h-1 bg-white/20 rounded-full"><div class="h-1 w-[78%] bg-brandBlue rounded-full"></div></div>
+              </div>
+              <div class="bg-white rounded-2xl p-3 border border-slate-100">
+                <p class="text-[10px] tracking-widest text-slate-500">CASE ACCURACY</p><p class="font-extrabold text-ink">98.4%</p><p class="text-[11px] text-emerald-600 font-semibold">↑ 12% vs baseline</p>
+              </div>
+              <div class="bg-brandOrange text-white rounded-2xl p-3">
+                <p class="text-[10px] tracking-widest text-white/80">RESPONSE TIME</p><p class="font-extrabold">48 Hours</p><p class="text-[11px] text-white/90">Avg. consultation</p>
+              </div>
+            </div>
+          </div>
+          <!-- bottom badges -->
+          <div class="flex flex-wrap gap-2 mt-3 justify-center lg:justify-start">
+            <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2"><i data-lucide="shield" class="w-3.5 h-3.5 text-brandBlue"></i> Evidence-Based</span>
+            <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2"><i data-lucide="badge-check" class="w-3.5 h-3.5 text-emerald-500"></i> Peer Reviewed</span>
+            <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold">Court-Ready Reports</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-white border border-slate-200 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+        <p class="text-xs tracking-[0.18em] font-bold text-slate-500">TRUSTED BY LEADING INSTITUTIONS</p>
+        <div class="flex flex-wrap items-center gap-6 text-sm font-semibold text-slate-600">
+          <span class="flex items-center gap-2"><i data-lucide="scale" class="w-4 h-4"></i> The Law Society</span>
+          <span class="flex items-center gap-2"><i data-lucide="building-2" class="w-4 h-4"></i> NHS Trust</span>
+          <span class="flex items-center gap-2"><i data-lucide="graduation-cap" class="w-4 h-4"></i> UCL • KCL • Oxford</span>
+          <span class="hidden md:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs">● 4.9/5 Average Rating</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="bg-[#F8FAFC] border-b border-slate-200">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="relative">
+          <div class="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm">
+            <div class="p-4 flex items-center justify-between">
+              <span class="text-[11px] tracking-widest font-bold text-brandBlue bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">ABOUT THE ACADEMY</span>
+              <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> Making Science Accessible</span>
+            </div>
+            <div class="px-4 pb-4">
+              <img src="https://img.magnific.com/free-photo/3d-render-male-head-showing-brain_1048-5649.jpg?semt=ais_hybrid&w=740&q=80?width=800&height=600&nologo=true" class="w-full h-[360px] object-cover rounded-2xl" alt="about">
+              <div class="grid grid-cols-3 gap-3 mt-3">
+                <div class="bg-ink text-white rounded-2xl p-3 text-center"><p class="text-xl font-extrabold">15+</p><p class="text-[10px] tracking-widest opacity-70">YEARS RESEARCH</p></div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-3 text-center"><p class="text-xl font-extrabold text-ink">50+</p><p class="text-[10px] tracking-widest text-slate-500">PUBLICATIONS</p></div>
+                <div class="bg-brandOrange text-white rounded-2xl p-3 text-center"><p class="text-xl font-extrabold">24/7</p><p class="text-[10px] tracking-widest opacity-80">SUPPORT</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -right-2 bg-white border border-slate-200 rounded-2xl shadow-xl p-3 flex items-center gap-3 hidden lg:flex">
+            <img src="https://i.pravatar.cc/100?img=32" class="w-10 h-10 rounded-full object-cover" alt="">
+            <div><p class="text-xs font-bold">Dr. Sarah Chen</p><p class="text-[11px] text-slate-500">Lead Forensic Neuroscientist</p></div>
+            <span class="w-8 h-8 rounded-full bg-emerald-500 text-white grid place-items-center"><i data-lucide="check" class="w-4 h-4"></i></span>
+          </div>
+        </div>
+        <div>
+          <h2 class="font-serif text-[34px] lg:text-[42px] leading-none text-ink">Bridging Brain Science <br><span class="text-brandBlue italic">& Justice</span></h2>
+          <p class="text-slate-600 leading-relaxed mt-4">The Forensic Neuroscience Training Academy translates cutting-edge neuroscience into practical, courtroom-ready insights. We empower attorneys, clinicians, students and researchers to understand behaviour, evaluate evidence, and advocate with scientific confidence.</p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue grid place-items-center"><i data-lucide="lightbulb" class="w-5 h-5"></i></div>
+              <h4 class="font-bold text-ink mt-3">Our Mission</h4><p class="text-sm text-slate-600 mt-1 leading-relaxed">Demystify neuroscience without dumbing it down — clarity, accuracy, and integrity in every lesson.</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl bg-orange-50 text-brandOrange grid place-items-center"><i data-lucide="users-2" class="w-5 h-5"></i></div>
+              <h4 class="font-bold text-ink mt-3">Who We Serve</h4><p class="text-sm text-slate-600 mt-1 leading-relaxed">Legal professionals, clinicians, researchers, students and curious minds seeking credible knowledge.</p>
+            </div>
+          </div>
+          <div class="bg-ink rounded-2xl p-5 mt-4 flex flex-wrap items-center justify-between gap-4 text-white">
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-white/10 grid place-items-center"><i data-lucide="quote" class="w-5 h-5"></i></div><p class="text-sm italic text-white/90">“Where neuroscience meets the pursuit of justice.”</p></div>
+            <button onclick="document.getElementById('research').scrollIntoView({behavior:'smooth'})" class="text-xs font-bold tracking-widest bg-white text-ink px-5 py-2.5 rounded-full">OUR PHILOSOPHY →</button>
+          </div>
+          <div class="flex gap-3 mt-5">
+            <button onclick="openConsult()" class="bg-ink text-white px-6 py-3 rounded-full font-semibold text-sm">Meet Our Experts</button>
+            <button onclick="toast('Brochure downloaded')" class="bg-white border border-slate-200 px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> Download Brochure</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="bg-white border-b border-slate-200">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="text-[11px] tracking-[0.16em] font-bold text-brandOrange">● OUR EXPERTISE</span>
+          <h2 class="font-serif text-[32px] lg:text-[40px] leading-none text-ink mt-2">Comprehensive <span class="text-brandBlue">Services</span></h2>
+          <p class="text-slate-600 mt-3 max-w-[560px]">From accredited professional training to bespoke forensic consultation — each service transforms complex neuroscience into actionable clarity.</p>
+        </div>
+        <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 p-1 rounded-full">
+          <button class="svc-tab active bg-ink text-white px-4 py-2 rounded-full text-xs font-bold" data-tab="all">All Services</button>
+          <button class="svc-tab px-4 py-2 rounded-full text-xs font-bold text-slate-600" data-tab="training">Training</button>
+          <button class="svc-tab px-4 py-2 rounded-full text-xs font-bold text-slate-600" data-tab="consult">Consultation</button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 mt-8">
+        <!-- Card 1 -->
+        <article data-cat="training" class="group bg-white border border-slate-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col">
+          <div class="relative h-[220px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/professional%20training%20classroom%20with%20holographic%20brain%20projection,%20students%20taking%20notes,%20modern%20university,%20scientific?width=600&height=400&nologo=true" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="">
+            <span class="absolute top-3 left-3 bg-brandBlue text-white text-[11px] font-bold px-3 py-1 rounded-full">CPD CERTIFIED • POPULAR</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 12 Weeks • Online</span>
+          </div>
+          <div class="px-6 pb-6 flex-1 flex flex-col">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue grid place-items-center"><i data-lucide="graduation-cap" class="w-5 h-5"></i></div>
+            <h3 class="font-bold text-ink text-[18px] leading-tight mt-3">Professional Training & Education</h3>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">Accredited courses, masterclasses & CPD workshops translating neuroscience into legal and clinical practice.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Forensic Neuropsychology Fundamentals</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Brain Injury & Criminal Responsibility</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Expert Witness Skills Lab</li>
+            </ul>
+            <div class="flex items-center gap-3 mt-6">
+              <button onclick="toast('Training details opened')" class="flex-1 bg-ink text-white font-semibold py-3 rounded-full text-sm">Explore Program →</button>
+              <button onclick="toast('Syllabus sent to your email')" class="w-11 h-11 rounded-full border border-slate-200 grid place-items-center hover:bg-slate-50"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article data-cat="consult" class="group bg-white border border-slate-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col">
+          <div class="relative h-[220px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/forensic%20consultation%20modern%20office%20brain%20scan%20on%20screen,%20lawyer%20and%20neuroscientist%20reviewing%20evidence,%20professional?width=600&height=400&nologo=true" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="">
+            <span class="absolute top-3 left-3 bg-brandOrange text-white text-[11px] font-bold px-3 py-1 rounded-full">CONFIDENTIAL • 48H RESPONSE</span>
+          </div>
+          <div class="px-6 pb-6 flex-1 flex flex-col">
+            <div class="w-10 h-10 rounded-xl bg-orange-50 text-brandOrange grid place-items-center"><i data-lucide="scale" class="w-5 h-5"></i></div>
+            <h3 class="font-bold text-ink text-[18px] leading-tight mt-3">Forensic Neuroscience Consultation</h3>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">Independent expert analysis, report preparation and courtroom testimony support for complex cases.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Case Review & Brain-Behaviour Mapping</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Court-Ready Expert Reports</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5"></i> Attorney Strategy Sessions</li>
+            </ul>
+            <div class="flex items-center gap-3 mt-6">
+              <button onclick="openConsult()" class="flex-1 bg-brandOrange text-white font-semibold py-3 rounded-full text-sm">Request Consultation →</button>
+              <button onclick="toast('Consultation guide opened')" class="w-11 h-11 rounded-full border border-slate-200 grid place-items-center hover:bg-slate-50"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article data-cat="training" class="group bg-ink rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col text-white border border-slate-800">
+          <div class="relative h-[220px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/digital%20library%20holographic%20books%20brain%20anatomy%20visualization,%20futuristic%20neuroscience%20resources,%20glowing?width=600&height=400&nologo=true" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="">
+            <span class="absolute top-3 left-3 bg-white text-ink text-[11px] font-bold px-3 py-1 rounded-full">500+ RESOURCES • WEEKLY UPDATES</span>
+          </div>
+          <div class="px-6 pb-6 flex-1 flex flex-col">
+            <div class="w-10 h-10 rounded-xl bg-white/10 text-white grid place-items-center"><i data-lucide="library" class="w-5 h-5"></i></div>
+            <h3 class="font-bold text-white text-[18px] leading-tight mt-3">Expert Knowledge & Resources</h3>
+            <p class="text-sm text-white/70 mt-2 leading-relaxed">Research digests, case libraries, video masterclasses and tools to stay at the cutting edge.</p>
+            <ul class="mt-4 space-y-2 text-sm text-white/90">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brandOrange mt-0.5"></i> Research Briefings & White Papers</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brandOrange mt-0.5"></i> Video Library (120+ Hours)</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brandOrange mt-0.5"></i> Interactive Brain Atlases</li>
+            </ul>
+            <div class="flex items-center gap-3 mt-6">
+              <button onclick="toast('Resource library opened')" class="flex-1 bg-white text-ink font-semibold py-3 rounded-full text-sm">Browse Library →</button>
+              <button class="w-11 h-11 rounded-full bg-white/10 border border-white/15 grid place-items-center"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED VIDEOS -->
+  <section id="videos" class="bg-[#F8FAFC] border-b border-slate-200">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-xs font-bold tracking-widest text-slate-600"><i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> YOUTUBE • @TheForensicNeuroscientist</span>
+          <h2 class="font-serif text-[32px] lg:text-[40px] leading-none text-ink mt-3">Featured <span class="text-brandOrange">Videos</span></h2>
+          <p class="text-slate-600 mt-2">Bite-sized, evidence-based explainers — trusted by 85k+ subscribers worldwide.</p>
+        </div>
+        <a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-full inline-flex items-center gap-2 text-sm">Visit YouTube Channel <i data-lucide="external-link" class="w-4 h-4"></i></a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+        <!-- Video Card -->
+        <div class="bg-white border border-slate-200 rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition group">
+          <div class="relative h-[190px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/neuroscience%20youtube%20thumbnail%20brain%20scan%20analysis%20blue%20orange%20modern%20clean%20text%20overlay%20play%20button?width=600&height=340&nologo=true" class="w-full h-full object-cover" alt="">
+            <span class="absolute top-3 left-3 bg-ink/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">FORENSIC PSYCHOLOGY • 12:34</span>
+            <button onclick="openVideo('https://www.youtube.com/embed/uGySNlWnPRk')" class="absolute inset-0 grid place-items-center">
+              <span class="w-14 h-14 rounded-full bg-white shadow-xl grid place-items-center group-hover:scale-110 transition"><i data-lucide="play" class="w-6 h-6 text-ink fill-ink ml-0.5"></i></span>
+            </button>
+          </div>
+          <div class="px-5 pb-5">
+            <h4 class="font-bold text-ink leading-tight">How Brain Injury Impacts Criminal Responsibility</h4>
+            <p class="text-xs text-slate-500 mt-1">18K views • 2 weeks ago • Expert Analysis</p>
+            <div class="flex items-center gap-2 mt-3 text-xs font-semibold"><span class="bg-blue-50 text-brandBlue border border-blue-200 px-2.5 py-1 rounded-full">Neuroscience</span><span class="bg-orange-50 text-brandOrange border border-orange-200 px-2.5 py-1 rounded-full">Law</span></div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition group">
+          <div class="relative h-[190px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/brain%20and%20memory%20neuroscience%20visualization%20youtube%20thumbnail%20minimal%20scientific?width=600&height=340&nologo=true" class="w-full h-full object-cover" alt="">
+            <span class="absolute top-3 left-3 bg-ink/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">BRAIN & BEHAVIOUR • 09:18</span>
+            <button onclick="openVideo('https://www.youtube.com/embed/uGySNlWnPRk')" class="absolute inset-0 grid place-items-center">
+              <span class="w-14 h-14 rounded-full bg-white shadow-xl grid place-items-center group-hover:scale-110 transition"><i data-lucide="play" class="w-6 h-6 text-ink fill-ink ml-0.5"></i></span>
+            </button>
+          </div>
+          <div class="px-5 pb-5">
+            <h4 class="font-bold text-ink leading-tight">The Neuroscience of Memory & Eyewitness Testimony</h4>
+            <p class="text-xs text-slate-500 mt-1">24K views • 1 month ago • Research Digest</p>
+            <div class="flex items-center gap-2 mt-3 text-xs font-semibold"><span class="bg-blue-50 text-brandBlue border border-blue-200 px-2.5 py-1 rounded-full">Memory</span><span class="bg-slate-50 text-slate-700 border border-slate-200 px-2.5 py-1 rounded-full">Forensics</span></div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition group">
+          <div class="relative h-[190px] overflow-hidden m-3 rounded-2xl">
+            <img src="https://image.pollinations.ai/prompt/courtroom%20neuroscience%20expert%20witness%20visualization%20youtube%20thumbnail%20professional?width=600&height=340&nologo=true" class="w-full h-full object-cover" alt="">
+            <span class="absolute top-3 left-3 bg-ink/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">EXPERT WITNESS • 15:02</span>
+            <button onclick="openVideo('https://www.youtube.com/embed/uGySNlWnPRk')" class="absolute inset-0 grid place-items-center">
+              <span class="w-14 h-14 rounded-full bg-white shadow-xl grid place-items-center group-hover:scale-110 transition"><i data-lucide="play" class="w-6 h-6 text-ink fill-ink ml-0.5"></i></span>
+            </button>
+          </div>
+          <div class="px-5 pb-5">
+            <h4 class="font-bold text-ink leading-tight">Presenting Neuroscience Evidence in Court</h4>
+            <p class="text-xs text-slate-500 mt-1">31K views • 3 weeks ago • Practical Guide</p>
+            <div class="flex items-center gap-2 mt-3 text-xs font-semibold"><span class="bg-orange-50 text-brandOrange border border-orange-200 px-2.5 py-1 rounded-full">Practice</span><span class="bg-slate-50 text-slate-700 border border-slate-200 px-2.5 py-1 rounded-full">CPD</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Introduction Video Highlight -->
+      <div class="mt-8 bg-ink rounded-[24px] overflow-hidden border border-slate-800 grid lg:grid-cols-[1.1fr_0.9fr] gap-0">
+        <div class="p-6 lg:p-8">
+          <span class="inline-flex items-center gap-2 bg-brandOrange text-white text-[11px] font-extrabold tracking-widest px-3 py-1.5 rounded-full">● INTRODUCTION VIDEO</span>
+          <h3 class="font-serif text-[26px] lg:text-[30px] leading-tight text-white mt-3">Welcome to the Forensic Neuroscience Training Academy</h3>
+          <p class="text-white/70 text-sm leading-relaxed mt-3">Hear from our founder on why neuroscience belongs in the justice system — and how we make it accessible, rigorous, and impactful for every professional.</p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <button onclick="openVideo('https://www.youtube.com/embed/uGySNlWnPRk')" class="bg-white text-ink font-bold px-6 py-3 rounded-full inline-flex items-center gap-2 text-sm"><i data-lucide="play" class="w-4 h-4 fill-ink"></i> Watch Now — 3:42</button>
+            <a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 text-sm">Subscribe on YouTube</a>
+          </div>
+          <div class="flex items-center gap-6 mt-6 text-white/80 text-xs">
+            <span class="flex items-center gap-2"><i data-lucide="eye" class="w-4 h-4"></i> 54K views</span>
+            <span class="flex items-center gap-2"><i data-lucide="thumbs-up" class="w-4 h-4"></i> 2.1K likes</span>
+            <span class="flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i> 312 comments</span>
+          </div>
+        </div>
+        <div class="relative bg-black lg:m-3 rounded-2xl overflow-hidden min-h-[280px]">
+          <img src="https://image.pollinations.ai/prompt/professional%20presenter%20in%20studio%20with%20brain%20visualization%20background,%20modern%20neuroscience%20introduction%20video%20thumbnail?width=700&height=400&nologo=true" class="w-full h-full object-cover opacity-80" alt="">
+          <button onclick="openVideo('https://www.youtube.com/embed/uGySNlWnPRk')" class="absolute inset-0 grid place-items-center">
+            <span class="w-20 h-20 rounded-full bg-white shadow-2xl grid place-items-center hover:scale-105 transition"><i data-lucide="play" class="w-8 h-8 text-ink fill-ink ml-1"></i></span>
+          </button>
+          <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+            <span class="bg-black/70 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20">▶ Introduction • Forensic Neuroscience</span>
+            <span class="bg-brandOrange text-white text-xs font-bold px-3 py-1.5 rounded-full">3:42</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATIONAL / RESEARCH -->
+  <section id="research" class="bg-white border-b border-slate-200">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="text-[11px] tracking-[0.16em] font-bold text-brandBlue">● RESEARCH & INSIGHTS</span>
+          <h2 class="font-serif text-[32px] lg:text-[40px] leading-none text-ink mt-2">Educational <span class="text-brandOrange">Spotlight</span></h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="toast('Filters applied')" class="bg-white border border-slate-200 px-4 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2"><i data-lucide="filter" class="w-4 h-4"></i> Filter</button>
+          <button onclick="toast('View all articles')" class="bg-ink text-white px-5 py-2.5 rounded-full text-sm font-bold">View All →</button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-6 mt-8">
+        <!-- Featured large card -->
+        <div class="lg:col-span-7 bg-white border border-slate-200 rounded-[24px] overflow-hidden shadow-sm">
+          <div class="relative h-[260px] m-3 rounded-2xl overflow-hidden">
+            <img src="https://image.pollinations.ai/prompt/detailed%20MRI%20brain%20scan%20with%20neural%20activity%20overlay,%20scientific%20research,%20clean%20lab?width=800&height=500&nologo=true" class="w-full h-full object-cover" alt="">
+            <span class="absolute top-3 left-3 bg-white text-ink text-xs font-bold px-3 py-1.5 rounded-full">FEATURED • FORENSIC APPLICATIONS</span>
+          </div>
+          <div class="px-6 pb-6">
+            <h3 class="font-bold text-[18px] text-ink leading-tight">Adolescent Brain Development & Culpability: What Courts Need to Know</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mt-2">A synthesis of longitudinal neuroimaging studies on prefrontal maturation, risk-taking, and legal implications — with practical guidance for expert testimony.</p>
+            <div class="flex items-center gap-3 mt-4 text-xs text-slate-500"><span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 8 min read</span><span class="w-1 h-1 bg-slate-300 rounded-full"></span><span>Dr. A. Mensah • 12 Jan 2025</span></div>
+            <button onclick="toast('Article opened')" class="mt-4 bg-white border border-slate-200 px-5 py-2.5 rounded-full text-sm font-semibold">Read Article →</button>
+          </div>
+        </div>
+        <!-- Stack -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 flex gap-4 hover:shadow-md transition">
+            <img src="https://image.pollinations.ai/prompt/brain%20function%20neurons%20firing%20microscopic%20view%20blue%20orange?width=200&height=200&nologo=true" class="w-24 h-24 rounded-xl object-cover" alt="">
+            <div class="flex-1"><span class="text-[11px] tracking-widest font-bold text-brandBlue">BRAIN FUNCTION</span><h4 class="font-bold text-ink leading-tight mt-1">Executive Function Under Stress</h4><p class="text-xs text-slate-500 mt-1">How acute stress reshapes decision-making circuits.</p><button onclick="toast('Opened')" class="text-xs font-bold text-brandBlue mt-2">Explore →</button></div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 flex gap-4 hover:shadow-md transition">
+            <img src="https://image.pollinations.ai/prompt/human%20behaviour%20psychology%20research%20group%20analysis?width=200&height=200&nologo=true" class="w-24 h-24 rounded-xl object-cover" alt="">
+            <div class="flex-1"><span class="text-[11px] tracking-widest font-bold text-brandOrange">HUMAN BEHAVIOUR</span><h4 class="font-bold text-ink leading-tight mt-1">Deception, Memory & Credibility</h4><p class="text-xs text-slate-500 mt-1">Separating myth from neuroscience in witness evaluation.</p><button onclick="toast('Opened')" class="text-xs font-bold text-brandOrange mt-2">Explore →</button></div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 flex gap-4 hover:shadow-md transition">
+            <img src="https://image.pollinations.ai/prompt/neuroscience%20research%20lab%20with%20brain%20models%20and%20data%20visualization?width=200&height=200&nologo=true" class="w-24 h-24 rounded-xl object-cover" alt="">
+            <div class="flex-1"><span class="text-[11px] tracking-widest font-bold text-emerald-600">NEUROSCIENCE RESEARCH</span><h4 class="font-bold text-ink leading-tight mt-1">Traumatic Brain Injury Screening Toolkit</h4><p class="text-xs text-slate-500 mt-1">Free checklist for attorneys and clinicians.</p><button onclick="toast('Toolkit downloaded')" class="text-xs font-bold text-ink mt-2">Download PDF →</button></div>
+          </div>
+          <div class="bg-gradient-to-br from-brandBlue to-[#1E88C7] rounded-2xl p-5 text-white flex items-center justify-between">
+            <div><p class="text-sm font-bold">Weekly Research Brief</p><p class="text-xs text-white/80">Get 1 concise paper breakdown every Monday.</p></div>
+            <button onclick="toast('Subscribed!')" class="bg-white text-ink font-bold px-5 py-2.5 rounded-full text-sm">Subscribe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-5 text-center"><p class="text-2xl font-extrabold text-ink">120+</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">VIDEO MASTERCLASSES</p></div>
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-5 text-center"><p class="text-2xl font-extrabold text-ink">500+</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">PEER-REVIEWED PAPERS</p></div>
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-5 text-center"><p class="text-2xl font-extrabold text-brandBlue">98%</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">SATISFACTION RATE</p></div>
+        <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-5 text-center"><p class="text-2xl font-extrabold text-brandOrange">24H</p><p class="text-[11px] tracking-widest font-semibold text-slate-500">AVG. SUPPORT REPLY</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULT CTA -->
+  <section id="contact" class="bg-[#F8FAFC] border-b border-slate-200">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-10">
+      <div class="bg-gradient-to-br from-ink via-[#132040] to-[#1A2F5E] rounded-[28px] p-6 lg:p-8 relative overflow-hidden border border-slate-800">
+        <div class="absolute -right-10 -top-10 w-80 h-80 bg-brandBlue/20 rounded-full blur-3xl"></div>
+        <div class="absolute -left-10 -bottom-10 w-80 h-80 bg-brandOrange/15 rounded-full blur-3xl"></div>
+        <div class="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
+          <div>
+            <span class="bg-white/10 border border-white/15 text-white text-[11px] tracking-widest font-bold px-3 py-1.5 rounded-full">START YOUR CONSULTATION</span>
+            <h3 class="font-serif text-[28px] lg:text-[34px] leading-tight text-white mt-3">Ready to bring neuroscience clarity to your next case?</h3>
+            <p class="text-white/70 text-sm leading-relaxed mt-3 max-w-[560px]">Confidential, independent, and rigorously evidence-based. Receive a preliminary case assessment and fee proposal within 48 hours.</p>
+            <div class="flex flex-wrap gap-3 mt-6">
+              <button onclick="openConsult()" class="bg-brandOrange text-white font-bold px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-sm">Book Expert Consultation →</button>
+              <button onclick="toast('Brochure: forensic neuroscience for attorneys (PDF)')" class="bg-white text-ink font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-sm"><i data-lucide="mail" class="w-4 h-4"></i> Request Fee Guide</button>
+            </div>
+            <div class="flex flex-wrap gap-4 mt-5 text-xs text-white/70">
+              <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4"></i> GDPR & Privileged Handling</span>
+              <span class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4"></i> Avg. reply 4 hours</span>
+              <span class="flex items-center gap-2"><i data-lucide="award" class="w-4 h-4"></i> HCPC Registered Experts</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-[20px] p-5 shadow-xl">
+            <h4 class="font-bold text-ink">Quick Enquiry</h4>
+            <p class="text-xs text-slate-500">We’ll respond within one business day.</p>
+            <form onsubmit="handleConsult(event)" class="space-y-3 mt-4">
+              <div class="grid grid-cols-2 gap-3">
+                <input required placeholder="Full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-brandBlue">
+                <input required type="email" placeholder="Work email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-brandBlue">
+              </div>
+              <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none">
+                <option>Consultation type: Case Review</option>
+                <option>Training & CPD Enquiry</option>
+                <option>Expert Witness Instruction</option>
+              </select>
+              <textarea placeholder="Brief case details (confidential)" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
+              <button type="submit" class="w-full bg-ink text-white font-bold py-3 rounded-full text-sm">Send Secure Enquiry →</button>
+              <p class="text-[11px] text-center text-slate-500">By submitting you agree to our confidentiality terms.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STYLE GUIDE (collapsible) -->
+  <section class="bg-white">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-10">
+      <details class="bg-slate-50 border border-slate-200 rounded-2xl p-6 open:shadow-sm">
+        <summary class="cursor-pointer list-none flex items-center justify-between">
+          <h3 class="font-bold text-ink flex items-center gap-2"><i data-lucide="palette" class="w-5 h-5 text-brandBlue"></i> Style Guide & Design System (Figma-ready)</h3>
+          <span class="bg-white border border-slate-200 px-3 py-1 rounded-full text-xs font-semibold">Toggle</span>
+        </summary>
+        <div class="grid lg:grid-cols-3 gap-6 mt-6">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5">
+            <h4 class="text-xs tracking-widest font-bold text-slate-500">BRAND COLORS</h4>
+            <div class="mt-3 space-y-3">
+              <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[#25AEF3] border border-slate-200"></span><div><p class="text-sm font-bold">#25AEF3 Bright Cyan Blue</p><p class="text-xs text-slate-500">Primary • CTA hover #1A9AD6</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[#F7930A] border border-slate-200"></span><div><p class="text-sm font-bold">#F7930A Vibrant Orange</p><p class="text-xs text-slate-500">Accent • Consultation CTAs</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-white border border-slate-200"></span><div><p class="text-sm font-bold">#FFFFFF White</p><p class="text-xs text-slate-500">Backgrounds, cards</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[#0B1628]"></span><div><p class="text-sm font-bold">#0B1628 Ink Navy</p><p class="text-xs text-slate-500">Sidebar, footers, headings</p></div></div>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-5">
+            <h4 class="text-xs tracking-widest font-bold text-slate-500">TYPOGRAPHY</h4>
+            <p class="font-serif text-2xl text-ink mt-3">Instrument Serif • Headlines</p>
+            <p class="font-sans text-sm text-slate-600 mt-1">Inter • Body & UI • 14–16px • Leading 1.6</p>
+            <p class="font-mono text-xs text-slate-500 mt-1">JetBrains Mono • Labels & Captions</p>
+            <div class="mt-4 space-y-2">
+              <p class="text-[11px] tracking-widest font-bold text-slate-500">BUTTONS</p>
+              <div class="flex gap-2 flex-wrap"><span class="bg-brandOrange text-white px-4 py-2 rounded-full text-xs font-bold">Primary Orange</span><span class="bg-ink text-white px-4 py-2 rounded-full text-xs font-bold">Secondary Ink</span><span class="bg-white border border-slate-200 px-4 py-2 rounded-full text-xs font-bold">Ghost</span></div>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl p-5">
+            <h4 class="text-xs tracking-widest font-bold text-slate-500">COMPONENTS & BREAKPOINTS</h4>
+            <ul class="text-sm text-slate-600 mt-2 space-y-1 list-disc ml-4">
+              <li>Cards: 20–28px radius, 1px line #E2E8F0, shadow-sm</li>
+              <li>Spacing: 4/8/12/16/24/32 • Section pad 48–64px</li>
+              <li>Icons: Lucide 16–20px • Active nav: blue bg + orange marker</li>
+              <li>Breakpoints: 640 / 768 / 1024 / 1280</li>
+              <li>Images: 3D brain, neural nets — no stock, AI-generated</li>
+            </ul>
+            <p class="text-xs text-slate-500 mt-3">Template: Desktop homepage, mobile drawer, internal page (reuse hero without brain), Figma layers named.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-slate-800">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-10 py-10">
+      <div class="grid lg:grid-cols-[1.3fr_0.7fr_0.7fr_1fr] gap-8">
+        <div>
+          <div class="flex items-center gap-3">
+            <img src="https://i.postimg.cc/Zqb7np2J/logo-removebg-preview.png" class="w-11 h-11 bg-white rounded-xl p-1 object-contain" alt="">
+            <div><p class="text-xs tracking-[0.16em] font-bold text-brandBlue">THE FORENSIC NEUROSCIENTIST</p><p class="text-sm font-bold -mt-1">TRAINING ACADEMY</p></div>
+          </div>
+          <p class="text-sm text-white/70 leading-relaxed mt-4 max-w-[420px]">Making neuroscience understandable, credible and actionable for justice, healthcare and education. Evidence-based. Ethically grounded. Globally accessible.</p>
+          <!-- <div class="flex gap-2 mt-4">
+            <a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="w-9 h-9 rounded-full bg-white/10 border border-white/15 grid place-items-center hover:bg-white hover:text-ink transition"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 border border-white/15 grid place-items-center hover:bg-white hover:text-ink transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 border border-white/15 grid place-items-center hover:bg-white hover:text-ink transition"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 border border-white/15 grid place-items-center hover:bg-white hover:text-ink transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          </div> -->
+          
+          <div class="flex gap-2 mt-4">
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@TheForensicNeuroscientist"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="YouTube"
+               style="width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:white;transition:all .25s ease;"
+               onmouseover="this.style.background='#fff';this.style.color='#111827'"
+               onmouseout="this.style.background='rgba(255,255,255,0.10)';this.style.color='#fff'">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
+              </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="#"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="LinkedIn"
+               style="width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:white;transition:all .25s ease;"
+               onmouseover="this.style.background='#fff';this.style.color='#111827'"
+               onmouseout="this.style.background='rgba(255,255,255,0.10)';this.style.color='#fff'">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 2H3.55C2.69 2 2 2.69 2 3.55v16.9c0 .86.69 1.55 1.55 1.55h16.9c.86 0 1.55-.69 1.55-1.55V3.55c0-.86-.69-1.55-1.55-1.55ZM8 18H5V9h3v9ZM6.5 7.7a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM19 18h-3v-4.4c0-1.05-.02-2.4-1.46-2.4-1.46 0-1.69 1.14-1.69 2.32V18h-3V9h2.88v1.23h.04c.4-.7 1.38-1.44 2.84-1.44 3.04 0 3.6 2 3.6 4.6V18Z"/>
+              </svg>
+            </a>
+
+            <!-- X / Twitter -->
+            <a href="#"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="X"
+               style="width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:white;transition:all .25s ease;"
+               onmouseover="this.style.background='#fff';this.style.color='#111827'"
+               onmouseout="this.style.background='rgba(255,255,255,0.10)';this.style.color='#fff'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-5-7.2L5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/>
+              </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="#"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Instagram"
+               style="width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:white;transition:all .25s ease;"
+               onmouseover="this.style.background='#fff';this.style.color='#111827'"
+               onmouseout="this.style.background='rgba(255,255,255,0.10)';this.style.color='#fff'">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+
+          </div>
+
+        </div>
+        <div>
+          <h4 class="text-sm font-bold tracking-widest text-white/90">NAVIGATION</h4>
+          <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a href="#home" class="hover:text-white">Overview</a></li>
+            <li><a href="#about" class="hover:text-white">About Academy</a></li>
+            <li><a href="#services" class="hover:text-white">Services & Training</a></li>
+            <li><a href="#videos" class="hover:text-white">Academy Channel</a></li>
+            <li><a href="#research" class="hover:text-white">Research & Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold tracking-widest text-white/90">RESOURCES</h4>
+          <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a href="#" onclick="toast('Syllabus PDF')" class="hover:text-white">Syllabus & CPD</a></li>
+            <li><a href="#" onclick="toast('Case files locked - request access')" class="hover:text-white">Case File Library</a></li>
+            <li><a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="hover:text-white">YouTube Academy</a></li>
+            <li><a href="#" class="hover:text-white">Privacy & Ethics</a></li>
+            <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl p-5 text-ink">
+          <h4 class="font-bold text-ink">Subscribe to Briefings</h4><p class="text-xs text-slate-500 mt-1">One concise research summary every Monday. No spam.</p>
+          <form onsubmit="event.preventDefault(); toast('Welcome to the briefings — check your inbox'); this.reset()" class="flex gap-2 mt-3">
+            <input required type="email" placeholder="Work email" class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-4 py-2.5 text-sm outline-none">
+            <button class="bg-ink text-white px-5 py-2.5 rounded-full text-sm font-bold">Join</button>
+          </form>
+          <p class="text-[11px] text-slate-500 mt-2">GDPR compliant • Unsubscribe anytime</p>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs text-white/60">
+        <p>© 2026 Forensic Neuroscience Training Academy. All rights reserved. Developed by Zannatul. • London • Remote worldwide</p>
+        <p class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> All systems operational • CPD Certified • HCPC Aligned</p>
+      </div>
+    </div>
+  </footer>
+</main>
+</div>
+
+<!-- VIDEO MODAL -->
+<div id="videoModal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-ink/80 backdrop-blur-sm" onclick="closeVideo()"></div>
+  <div class="relative max-w-[900px] mx-auto mt-10 lg:mt-16 p-4">
+    <div class="bg-black rounded-[20px] overflow-hidden shadow-2xl border border-white/10">
+      <div class="flex items-center justify-between px-4 py-3 bg-white">
+        <p class="text-sm font-bold text-ink flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> Now Playing • Forensic Neuroscience Training Academy</p>
+        <button onclick="closeVideo()" class="w-9 h-9 rounded-full bg-slate-100 grid place-items-center hover:bg-slate-200"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="aspect-video bg-black">
+        <iframe id="videoFrame" class="w-full h-full" src="" title="Introduction Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="bg-white px-4 py-3 flex items-center justify-between">
+        <p class="text-xs text-slate-500">Tip: Watch in HD • Full video at <a href="https://www.youtube.com/@TheForensicNeuroscientist" target="_blank" class="text-brandBlue font-semibold underline">YouTube Channel</a></p>
+        <button onclick="closeVideo()" class="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-full">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONSULT MODAL -->
+<div id="consultModal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" onclick="closeConsult()"></div>
+  <div class="relative max-w-[520px] mx-auto mt-10 p-4">
+    <div class="bg-white rounded-[20px] p-6 shadow-2xl">
+      <div class="flex items-start justify-between">
+        <h3 class="font-bold text-ink text-lg">Book a Confidential Consultation</h3>
+        <button onclick="closeConsult()" class="w-9 h-9 rounded-full bg-slate-100 grid place-items-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <p class="text-sm text-slate-600 mt-2">Tell us about your case or training need. We reply within 48 hours with availability and fees.</p>
+      <form onsubmit="handleConsult(event)" class="space-y-3 mt-4">
+        <input required placeholder="Full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none">
+        <input required type="email" placeholder="Email address" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none">
+        <textarea placeholder="How can we help?" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none"></textarea>
+        <button class="w-full bg-brandOrange text-white font-bold py-3 rounded-full">Request Consultation →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-ink text-white px-5 py-3 rounded-full shadow-xl text-sm font-semibold hidden items-center gap-2 z-50">
+  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i><span id="toastMsg">Done</span>
+</div>
+
+<script>
+lucide.createIcons();
+
+// Mobile menu
+const menuBtn=document.getElementById('menuBtn');
+const mobileNav=document.getElementById('mobileNav');
+menuBtn?.addEventListener('click',()=>{
+  mobileNav.classList.toggle('hidden');
+});
+document.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',()=>mobileNav.classList.add('hidden')));
+
+// Progress + active nav
+const progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  const scrolled=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  progress.style.width=scrolled+'%';
+  // active
+  const sections=['home','about','services','videos','research','contact'];
+  let cur='home';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 120) cur=id;
+  });
+  document.querySelectorAll('[data-nav]').forEach(a=>{
+    a.classList.remove('nav-active');
+    if(a.getAttribute('href')==='#'+cur) a.classList.add('nav-active');
+  });
+});
+
+// Video modal
+function openVideo(src="https://www.youtube.com/embed/uGySNlWnPRk?autoplay=1"){
+  document.getElementById('videoFrame').src=src;
+  document.getElementById('videoModal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+function closeVideo(){
+  document.getElementById('videoModal').classList.add('hidden');
+  document.getElementById('videoFrame').src="";
+  document.body.style.overflow='';
+}
+function openConsult(){document.getElementById('consultModal').classList.remove('hidden');}
+function closeConsult(){document.getElementById('consultModal').classList.add('hidden');}
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.remove('hidden'); t.classList.add('flex');
+  setTimeout(()=>{t.classList.add('hidden'); t.classList.remove('flex');},2500);
+}
+function handleConsult(e){
+  e.preventDefault();
+  closeConsult();
+  toast('Enquiry sent — we’ll reply within 48 hours');
+  e.target.reset();
+}
+
+// Service tabs
+document.querySelectorAll('.svc-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.svc-tab').forEach(b=>{b.classList.remove('active','bg-ink','text-white'); b.classList.add('text-slate-600')});
+    btn.classList.add('active','bg-ink','text-white'); btn.classList.remove('text-slate-600');
+    const tab=btn.dataset.tab;
+    document.querySelectorAll('[data-cat]').forEach(card=>{
+      card.style.display=(tab==='all' || card.dataset.cat===tab) ? 'flex' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
